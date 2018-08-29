@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Seguradora.User;
 
 namespace Seguradora
 {
@@ -16,17 +17,13 @@ namespace Seguradora
             Configuration = configurationBuilder.Build();
         }
 
-        // public Startup(IConfiguration configuration)
-        // {
-        //     this.Configuration = configuration;
-
-        // }
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
             services.Configure<AppConfig>(Configuration);
+            services.AddSingleton<IUserRepository, UserRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

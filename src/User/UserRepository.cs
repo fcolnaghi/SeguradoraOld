@@ -6,14 +6,20 @@ namespace Seguradora.User
 {
     public class UserRepository : IUserRepository
     {
-        public void Delete()
+        public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
 
-        public List<User> GetAll()
+        public HashSet<User> GetAll()
         {
-            throw new System.NotImplementedException();
+            HashSet<User> list = new HashSet<User>();
+            list.Add(new User());
+            list.Add(new User());
+            list.Add(new User());
+            list.Add(new User());
+            list.Add(new User());
+            return list;
         }
 
         public User GetById(int id)

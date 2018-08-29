@@ -6,8 +6,8 @@ namespace Seguradora.User
     public interface IUserRepository
     {
         User GetById(int id);
-        List<User> GetAll();
-        void Delete();
+        HashSet<User> GetAll();
+        void Delete(int id);
         string Save(User user);
     }
 }
