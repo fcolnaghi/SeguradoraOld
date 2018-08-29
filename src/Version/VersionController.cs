@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
-namespace Seguradora.Controllers
+namespace Seguradora.Version
 {
     [Route("api/[controller]")]
     public class VersionController : Controller

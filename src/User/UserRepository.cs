@@ -1,35 +1,50 @@
-using System.Collections.Generic;
-using Seguradora.User;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Seguradora.src.Auth;
+using Seguradora.src.User.Context;
 
-namespace Seguradora.User
-{
-    public class UserRepository : IUserRepository
-    {
-        public void Delete(int id)
-        {
-            //throw new System.NotImplementedException();
+namespace Seguradora.src.User {
+
+    public class UserRepository : IUserRepository {
+        private readonly MysqlContext _context;
+
+        public UserRepository (MysqlContext context) {
+            _context = context;
         }
 
-        public HashSet<User> GetAll()
-        {
-            HashSet<User> list = new HashSet<User>();
-            list.Add(new User());
-            list.Add(new User());
-            list.Add(new User());
-            list.Add(new User());
-            list.Add(new User());
-            return list;
+        public void Delete (int id) {
+            var user = _context.Users.Find (id);
+            if (user == null) {
+                
+            }
+
+            _context.Users.Remove (user);
+            _context.SaveChanges ();
         }
 
-        public User GetById(int id)
-        {
-            return new User();
+        public HashSet<User> GetAll () {
+            return new HashSet<User> (_context.Users.ToList ());
         }
 
-        public string Save(User user)
+        public User GetByAuth(Login auth)
         {
-            throw new System.NotImplementedException();
+            return _context.Users.SingleOrDefault(u => u.Email.Equals(auth.username));
+        }
+
+        public User GetById (int id) {
+            return _context.Users.Find(id);
+        }
+
+        public User Save (User user) {
+            if(user.Id > 0) {
+                _context.Users.Update(user);
+            } else {
+                _context.Users.Add(user);
+            }
+            _context.SaveChanges();
+
+            return user;
         }
     }
 }

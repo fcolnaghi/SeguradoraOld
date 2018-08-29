@@ -1,6 +1,6 @@
-namespace Seguradora.User {
+namespace Seguradora.src.User {
     public class User {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
